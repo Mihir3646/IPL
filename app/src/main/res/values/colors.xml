@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#263973</color>
+    <color name="colorPrimaryDark">#131D3A</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="textColor">#646464</color>
+    <color name="backGroundColor">#EEEEEE</color>
+
+    <color name="primary">#00BCD4</color>
+    <color name="primary_dark">#0097A7</color>
+    <color name="primary_light">#B2EBF2</color>
+    <color name="accent">#607D8B</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorLightGreen">#48B78D</color>
+
+    <color name="colorRed">#E53935</color>
+
+    <color name="floatingButtonColor">#009789</color>
+    <color name="colorYellow">#FFCA28</color>
+    <color name="colorBlueApp">#80CBC4</color>
+    <color name="colorGreenApp">#B39DDB</color>
+    <color name="colorRedApp">#FFAB91</color>
+    <color name="colorPurpleApp">#A1887F</color>
+    <color name="colorYellowApp">#81C784</color>
+    <color name="colorPrimaryBackground">#801F975D</color>
+    <color name="colorGrey">#809E9E9E</color>
+
+    <color name="colorBorder">#4CAF50</color>
+    <color name="redColor">#D50000</color>
+    <color name="blueColor">#2196F3</color>
+    <color name="navyBlueColor">#60263973</color>
+
+</resources>

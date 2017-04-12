@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">IPL</string>
+    <string name="vs">VS</string>
+    <string name="demo_string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+    <string name="home">Home</string>
+    <string name="create_league">Create League</string>
+    <string name="join_league">Join League</string>
+    <string name="my_league">My League</string>
+    <string name="logout">Log Out</string>
+</resources>

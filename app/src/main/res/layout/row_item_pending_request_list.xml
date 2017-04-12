@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="@dimen/_8sdp">
+
+
+    <TextView
+        android:id="@+id/row_item_pending_request_tv_request_from_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:lines="1"
+        android:maxLines="1"
+        android:text="Test 1"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/row_item_pending_request_btn_accept"
+        style="@style/customButtonAcceptRequest"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_2sdp"
+        android:padding="@dimen/_5sdp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/row_item_join_pending_request_btn_reject"
+        style="@style/customButtonRejectRequest"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginLeft="@dimen/_2sdp"
+        android:padding="@dimen/_5sdp"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/drawable_gradient_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/create_league_fragment_edt_league_nam"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:gravity="center"
+        android:padding="@dimen/_10sdp"
+        android:text="@string/demo_string"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_10sdp" />
+
+
+    <EditText
+        android:id="@+id/create_league_fragment_edt_league_nam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:hint="Enter league name"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLength="30"
+        android:maxLines="1"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="@dimen/_15sdp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_below="@id/create_league_fragment_edt_league_nam"
+        android:layout_margin="@dimen/_5sdp"
+        android:background="@color/colorWhite" />
+
+    <Button
+        android:id="@+id/fragment_create_league_btn_create_league"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navyBlueColor"
+        android:text="Create League"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

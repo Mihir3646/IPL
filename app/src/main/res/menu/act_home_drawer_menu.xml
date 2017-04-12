@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/act_home_nav_home"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/act_home_nav_create_league"
+            android:title="@string/create_league" />
+        <item
+            android:id="@+id/act_home_nav_join_league"
+            android:title="@string/join_league" />
+        <item
+            android:id="@+id/act_home_nav_my_league"
+            android:title="@string/my_league" />
+
+        <item
+            android:id="@+id/act_home_nav_log_out"
+            android:title="@string/logout" />
+        <!--<item-->
+        <!--android:id="@+id/act_home_nav_help"-->
+        <!--android:title="string_help" />-->
+        <!--<item-->
+        <!--android:id="@+id/act_home_nav_about_us"-->
+        <!--android:title="string_about_us" />-->
+        <!--<item-->
+        <!--android:id="@+id/act_home_nav_terms_and_conditions"-->
+        <!--android:title="string_terms_and_conditions" />-->
+        <!--<item-->
+        <!--android:id="@+id/act_home_nav_settings"-->
+        <!--android:title="string_settings" />-->
+        <!--<item-->
+        <!--android:id="@+id/act_home_nav_sign_out"-->
+        <!--android:title="string_sign_out" />-->
+    </group>
+
+</menu>
