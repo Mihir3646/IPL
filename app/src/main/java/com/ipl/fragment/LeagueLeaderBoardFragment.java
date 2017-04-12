@@ -12,13 +12,11 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.ipl.R;
 import com.ipl.activity.HomeActivity;
 import com.ipl.adapter.LeagueLeaderBoardListAdapter;
 import com.ipl.firebase.FirebaseConstant;
 import com.ipl.model.LeagueLeaderBoardModel;
-import com.ipl.model.MatchPredictionModel;
 
 import java.util.ArrayList;
 
@@ -64,7 +62,7 @@ public class LeagueLeaderBoardFragment extends Fragment {
                                 getUserDetails(postSnapshot1.getKey());
                                 final LeagueLeaderBoardModel leagueLeaderBoardModel = new LeagueLeaderBoardModel();
                                 leagueLeaderBoardModel.setMemberName(getMemberName());
-                                leagueLeaderBoardModelArrayList.add(leagueLeaderBoardModel);
+//                                leagueLeaderBoardModelArrayList.add(leagueLeaderBoardModel);
                             }
                             leagueLeaderBoardListAdapter.notifyDataSetChanged();
                         }
