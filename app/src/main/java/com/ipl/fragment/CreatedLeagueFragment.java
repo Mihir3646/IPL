@@ -51,7 +51,7 @@ public class CreatedLeagueFragment extends Fragment {
      */
     private void getCreatedLeagueList() {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child(getString(R.string.db_key_leagueName)).addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_league)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {

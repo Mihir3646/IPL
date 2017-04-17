@@ -22,7 +22,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:text="@string/created"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/blueColor"
             android:textStyle="bold" />
 
         <View

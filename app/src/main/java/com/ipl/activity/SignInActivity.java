@@ -115,7 +115,12 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            GoogleSignInResult result = null;
+            try {
+                result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage());
+            }
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 final GoogleSignInAccount account = result.getSignInAccount();
@@ -212,7 +217,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         userDetailsModel.setUserNickName(userNickName);
         userDetailsModel.setUserEmail(userEmail);
         userDetailsModel.setUserProfileImgUrl(userimgUrl);
-        ref.child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(userDetailsModel, new Firebase.CompletionListener() {
+        ref.child(getString(R.string.db_key_user)).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(userDetailsModel, new Firebase.CompletionListener() {
             @Override
             public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                 if (firebaseError != null) {

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "623129462691-mapg332m4nvrhdisbl506hqve1d2bb68.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ipl",
+            "certificate_hash": "2f00a9636b373416dc7ca3b975d5bde619136bd0"
+          }
+        },
+        {
           "client_id": "623129462691-k26c3na8p91m2ml62cmqltlt31gnuds8.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "623129462691-k26c3na8p91m2ml62cmqltlt31gnuds8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

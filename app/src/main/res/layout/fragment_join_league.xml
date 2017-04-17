@@ -1,68 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/drawable_gradient_background"
-    android:orientation="vertical"
-    android:padding="@dimen/_10sdp">
+    android:layout_height="match_parent">
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/colorWhite"-->
-    <!--android:orientation="horizontal">-->
-
-    <!--<EditText-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="@android:color/transparent"-->
-    <!--android:hint="League name"-->
-    <!--android:lines="1"-->
-    <!--android:maxLength="30"-->
-    <!--android:maxLines="1"-->
-    <!--android:padding="@dimen/_2sdp"-->
-    <!--android:textColor="@color/blueColor" />-->
-
-    <!--<Button-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/blueColor"-->
-    <!--android:padding="@dimen/_2sdp"-->
-    <!--android:text="search"-->
-    <!--android:textColor="@color/colorWhite" />-->
-    <!--</LinearLayout>-->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_30sdp"
-        android:background="@color/colorWhite"
-        android:orientation="horizontal"
-        android:padding="@dimen/_5sdp">
-
-        <EditText
-            android:id="@+id/fragment_join_league_edt_search"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:hint="@string/league_name"
-            android:inputType="text"
-            android:lines="1"
-            android:maxLength="30"
-            android:maxLines="1"
-            android:textColor="@color/blueColor" />
-
-        <ImageButton
-            android:id="@+id/fragment_join_league_ib_search"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_search_red" />
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/fragment_join_league_lv_league_list"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_join_league_layout_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/_10sdp" />
-</LinearLayout>
+        android:background="@drawable/drawable_gradient_background"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorWhite"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<EditText-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:hint="League name"-->
+        <!--android:lines="1"-->
+        <!--android:maxLength="30"-->
+        <!--android:maxLines="1"-->
+        <!--android:padding="@dimen/_2sdp"-->
+        <!--android:textColor="@color/blueColor" />-->
+
+        <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/blueColor"-->
+        <!--android:padding="@dimen/_2sdp"-->
+        <!--android:text="search"-->
+        <!--android:textColor="@color/colorWhite" />-->
+        <!--</LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp">
+
+            <EditText
+                android:id="@+id/fragment_join_league_edt_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/league_name"
+                android:inputType="text"
+                android:lines="1"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:textColor="@color/blueColor" />
+
+            <ImageButton
+                android:id="@+id/fragment_join_league_ib_search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_search_red" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/fragment_join_league_lv_league_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_10sdp" />
+    </LinearLayout>
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/fragment_join_league_layout_no_data"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--android:padding="@dimen/_10sdp"-->
+    <!--android:visibility="gone">-->
+
+    <!--<include layout="@layout/no_data_found_layout" />-->
+    <!--</LinearLayout>-->
+</FrameLayout>
