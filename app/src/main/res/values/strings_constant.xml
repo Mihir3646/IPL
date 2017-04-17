@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="db_key_userNickName">userNickName</string>
+    <string name="db_key_userImageURl">userImgUrl</string>
+    <string name="db_key_matchResult">matchResult</string>
+    <string name="db_key_prediction">prediction</string>
+    <string name="db_key_leaderBoard">leaderBoard</string>
+    <string name="db_key_userName">userName</string>
+    <string name="db_key_userEmail">userEmail</string>
+    <string name="db_key_user">user</string>
+
+    <string name="db_key_league">league</string>
+    <string name="db_key_leagueJoinRequest">leagueJoinRequest</string>
+    <string name="db_key_leagueName">leagueName</string>
+    <string name="db_key_status">status</string>
+    <string name="db_key_joinedLeague">joinedLeague</string>
+
+    <string name="db_key_pending">pending</string>
+    <string name="db_key_myLeague">myLeague</string>
+    <string name="db_key_match">match</string>
+
+    <string name="db_key_teamA">teamA</string>
+    <string name="db_key_teamB">teamB</string>
+    <string name="db_key_time">time</string>
+    <string name="db_key_date">date</string>
+    <string name="db_key_requestFromId">requestFromId</string>
+</resources>

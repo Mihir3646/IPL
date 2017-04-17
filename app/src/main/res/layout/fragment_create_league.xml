@@ -24,7 +24,7 @@
         android:layout_centerInParent="true"
         android:background="@android:color/transparent"
         android:gravity="center"
-        android:hint="Enter league name"
+        android:hint="@string/enter_league_name"
         android:inputType="text"
         android:lines="1"
         android:maxLength="30"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/navyBlueColor"
-        android:text="Create League"
+        android:text="@string/create_league"
         android:textColor="@color/colorWhite"
         android:textStyle="bold" />
 

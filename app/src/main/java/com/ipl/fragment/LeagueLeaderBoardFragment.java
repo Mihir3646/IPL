@@ -51,18 +51,18 @@ public class LeagueLeaderBoardFragment extends Fragment {
     private void getLeagueLeaderList() {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
         final String leagueName = ((HomeActivity) getActivity()).getLeagueName();
-        firebase.child("leaderBoard").child(leagueName).addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_leaderBoard)).child(leagueName).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    firebase.child("leaderBoard").child(leagueName).child(postSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                    firebase.child(getString(R.string.db_key_leaderBoard)).child(leagueName).child(postSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot postSnapshot1 : dataSnapshot.getChildren()) {
                                 getUserDetails(postSnapshot1.getKey());
                                 final LeagueLeaderBoardModel leagueLeaderBoardModel = new LeagueLeaderBoardModel();
                                 leagueLeaderBoardModel.setMemberName(getMemberName());
-//                                leagueLeaderBoardModelArrayList.add(leagueLeaderBoardModel);
+                                leagueLeaderBoardModelArrayList.add(leagueLeaderBoardModel);
                             }
                             leagueLeaderBoardListAdapter.notifyDataSetChanged();
                         }
@@ -81,7 +81,7 @@ public class LeagueLeaderBoardFragment extends Fragment {
             }
         });
 
-        firebase.child("leaderBoard").child(leagueName).addListenerForSingleValueEvent(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_leaderBoard)).child(leagueName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -99,10 +99,10 @@ public class LeagueLeaderBoardFragment extends Fragment {
      */
     private void getUserDetails(final String userID) {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child("user").child(userID).addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_user)).child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                setMemberName(dataSnapshot.child("userNickName").getValue().toString());
+                setMemberName(dataSnapshot.child(getString(R.string.db_key_userNickName)).getValue().toString());
             }
 
             @Override

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -52,19 +51,19 @@ public class CreatedLeagueFragment extends Fragment {
      */
     private void getCreatedLeagueList() {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child("league").addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_leagueName)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     if (postSnapshot.getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         final CreatedLeagueModel createdLeagueModel = new CreatedLeagueModel();
                         createdLeagueModel.setLeagueName(postSnapshot.getKey());
-                        firebase.child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("leagueJoinRequest")
+                        firebase.child(getString(R.string.db_key_user)).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(getString(R.string.db_key_leagueJoinRequest))
                                 .addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                            if (postSnapshot.child("leagueName").getValue().equals(createdLeagueModel.getLeagueName())) {
+                                            if (postSnapshot.child(getString(R.string.db_key_leagueName)).getValue().equals(createdLeagueModel.getLeagueName())) {
                                                 count = count + 1;
                                             }
                                         }

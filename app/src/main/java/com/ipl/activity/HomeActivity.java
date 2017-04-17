@@ -72,11 +72,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         final CircleImageView civUserImage = (CircleImageView) navigationView.findViewById(R.id.drawer_header_menu_img_user_image);
         final TextView tvUserName = (TextView) navigationView.findViewById(R.id.drawer_header_menu_tv_user_name);
 
-        tvUserName.setText(intent.getStringExtra("userNickName"));
-        Glide.with(this).load(intent.getStringExtra("userImgUrl")).into(civUserImage);
+        tvUserName.setText(intent.getStringExtra(getString(R.string.db_key_userNickName)));
+        Glide.with(this).load(intent.getStringExtra(getString(R.string.db_key_userImageURl))).into(civUserImage);
 
         final Toolbar iplToolbar = (Toolbar) findViewById(R.id.ipl_toolbar);
-        iplToolbar.setTitle("Home");
+        iplToolbar.setTitle(getString(R.string.home));
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, navDrawer, iplToolbar, R.string.drawer_open, R.string.drawer_close);
         navDrawer.addDrawerListener(toggle);
 
@@ -139,7 +139,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
      */
     private void generateLeaderBoard() {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child("matchResult").addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_matchResult)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -166,15 +166,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
      */
     private void getPredictions() {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child("prediction").addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_prediction)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (final DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    firebase.child("prediction").child(postSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                    firebase.child(getString(R.string.db_key_prediction)).child(postSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (final DataSnapshot postSnapshot1 : dataSnapshot.getChildren()) {
-                                firebase.child("prediction").child(postSnapshot.getKey()).child(postSnapshot1.getKey()).
+                                firebase.child(getString(R.string.db_key_prediction)).child(postSnapshot.getKey()).child(postSnapshot1.getKey()).
                                         addValueEventListener(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -225,7 +225,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             for (int j = 0; j < predictedResultModelArrayList.size(); j++) {
                 if (matchResultModelArrayList.get(i).getMatchId().equals(predictedResultModelArrayList.get(j).getMatchId())) {
                     if (matchResultModelArrayList.get(i).getWinningTeam().equals(predictedResultModelArrayList.get(j).getSelectedTeam())) {
-                        firebase.child("leaderBoard").child(predictedResultModelArrayList.get(j).getLeagueName())
+                        firebase.child(getString(R.string.db_key_leaderBoard)).child(predictedResultModelArrayList.get(j).getLeagueName())
                                 .child(predictedResultModelArrayList.get(j).getMatchId()).child(predictedResultModelArrayList.get(j).getUserId())
                                 .setValue(1, new Firebase.CompletionListener() {
                                     @Override

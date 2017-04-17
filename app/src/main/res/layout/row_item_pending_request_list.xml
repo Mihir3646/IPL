@@ -14,7 +14,6 @@
         android:layout_weight="1"
         android:lines="1"
         android:maxLines="1"
-        android:text="Test 1"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/_15sdp"
         android:textStyle="bold" />

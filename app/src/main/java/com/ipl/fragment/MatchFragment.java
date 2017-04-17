@@ -20,7 +20,6 @@ import com.ipl.R;
 import com.ipl.activity.HomeActivity;
 import com.ipl.firebase.FirebaseConstant;
 import com.ipl.model.MatchDetailsModel;
-import com.ipl.model.MatchPredictionModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -92,7 +91,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         final String matchId = tvMatchNumber.getText().toString().trim();
         final String leagueName = ((HomeActivity) getActivity()).getLeagueName();
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child("prediction").child(leagueName).child(matchId)
+        firebase.child(getString(R.string.db_key_prediction)).child(leagueName).child(matchId)
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(selectedTeam, new Firebase.CompletionListener() {
             @Override
             public void onComplete(FirebaseError firebaseError, Firebase firebase) {
@@ -115,16 +114,16 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         final int currentTime = Integer.parseInt(df.format(Calendar.getInstance().getTime()));
 
         final String todayDate = new SimpleDateFormat("dd-MM-yy").format(Calendar.getInstance().getTime());
-        firebase.child("match").addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_match)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    if (postSnapshot.child("date").getValue().equals(todayDate) && Integer.parseInt(postSnapshot.child("time").getValue().toString()) > currentTime) {
+                    if (postSnapshot.child(getString(R.string.db_key_date)).getValue().equals(todayDate) && Integer.parseInt(postSnapshot.child(getString(R.string.db_key_time)).getValue().toString()) > currentTime) {
                         final MatchDetailsModel matchDetailsModel = new MatchDetailsModel();
-                        matchDetailsModel.setTeamA(postSnapshot.child("teamA").getValue().toString());
-                        matchDetailsModel.setTeamB(postSnapshot.child("teamB").getValue().toString());
+                        matchDetailsModel.setTeamA(postSnapshot.child(getString(R.string.db_key_teamA)).getValue().toString());
+                        matchDetailsModel.setTeamB(postSnapshot.child(getString(R.string.db_key_teamB)).getValue().toString());
                         matchDetailsModel.setMatchId(postSnapshot.getKey());
-                        matchDetailsModel.setMatchTime(postSnapshot.child("time").getValue().toString());
+                        matchDetailsModel.setMatchTime(postSnapshot.child(getString(R.string.db_key_time)).getValue().toString());
                         matchDetailsModelArrayList.add(matchDetailsModel);
 
                     }
@@ -137,12 +136,12 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        firebase.child("match").addListenerForSingleValueEvent(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_match)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (matchDetailsModelArrayList.size() > 1) {
                     for (int i = 0; i < matchDetailsModelArrayList.size(); i++) {
-                        if (matchDetailsModelArrayList.get(i).getMatchTime().equals("04:00")) {
+                        if (matchDetailsModelArrayList.get(i).getMatchTime().equals("04")) {
                             btnTeamOne.setText(matchDetailsModelArrayList.get(i).getTeamA());
                             btnTeamTwo.setText(matchDetailsModelArrayList.get(i).getTeamB());
                             tvMatchNumber.setText(matchDetailsModelArrayList.get(i).getMatchId());

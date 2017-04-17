@@ -51,14 +51,14 @@ public class JoinedLeagueFragment extends Fragment {
      */
     private void getJoinedLeagueList() {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("joinedLeague")
+        firebase.child(getString(R.string.db_key_user)).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(getString(R.string.db_key_joinedLeague))
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             final JoinedLeagueModel joinedLeagueModel = new JoinedLeagueModel();
-                            joinedLeagueModel.setLeagueName(postSnapshot.child("leagueName").getValue().toString());
-                            joinedLeagueModel.setStatus(postSnapshot.child("status").getValue().toString());
+                            joinedLeagueModel.setLeagueName(postSnapshot.child(getString(R.string.db_key_leagueName)).getValue().toString());
+                            joinedLeagueModel.setStatus(postSnapshot.child(getString(R.string.db_key_status)).getValue().toString());
                             joinedLeagueModelArrayList.add(joinedLeagueModel);
 
                         }
@@ -70,7 +70,8 @@ public class JoinedLeagueFragment extends Fragment {
                     }
                 });
 
-        firebase.child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("joinedLeague")
+        firebase.child(getString(R.string.db_key_user)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(getString(R.string.db_key_joinedLeague))
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ipl.R;
 import com.ipl.fragment.JoinLeagueFragment;
@@ -59,9 +58,8 @@ public class JoinLeagueAdapter extends BaseAdapter implements View.OnClickListen
             public void onClick(View view) {
                 final Button btnJoin = (Button) view.findViewById(R.id.row_item_join_league_btn_join_league);
                 ((JoinLeagueFragment) fragment).requestJoinLeague(joinLeagueModel.getLeagueName());
-                btnJoin.setText("pending");
+                btnJoin.setText(context.getString(R.string.db_key_pending));
                 btnJoin.setBackgroundColor(ContextCompat.getColor(context, R.color.redColor));
-                Toast.makeText(context, "clicked" + i, Toast.LENGTH_SHORT).show();
             }
         });
         tvLeagueName.setText(joinLeagueModel.getLeagueName());

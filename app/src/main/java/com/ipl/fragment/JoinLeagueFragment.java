@@ -4,12 +4,10 @@ package com.ipl.fragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.firebase.client.DataSnapshot;
@@ -54,7 +52,7 @@ public class JoinLeagueFragment extends Fragment {
      */
     private void getOtherLeagueList() {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child("league").addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_league)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -72,7 +70,7 @@ public class JoinLeagueFragment extends Fragment {
             }
         });
 
-        firebase.child("league").
+        firebase.child(getString(R.string.db_key_league)).
 
                 addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -94,9 +92,10 @@ public class JoinLeagueFragment extends Fragment {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
         final JoinLeagueModel joinLeagueModel = new JoinLeagueModel();
         joinLeagueModel.setLeagueName(leagueName);
-        joinLeagueModel.setStatus("pending");
-        firebase.child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("joinedLeague")
-                .child(firebase.child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("joinedLeague").push().getKey())
+        joinLeagueModel.setStatus(getString(R.string.db_key_pending));
+        firebase.child(getString(R.string.db_key_user)).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(getString(R.string.db_key_joinedLeague))
+                .child(firebase.child(getString(R.string.db_key_user)).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(getString(R.string.db_key_joinedLeague))
+                        .push().getKey())
                 .setValue(joinLeagueModel, new Firebase.CompletionListener() {
                     @Override
                     public void onComplete(FirebaseError firebaseError, Firebase firebase) {
@@ -116,7 +115,7 @@ public class JoinLeagueFragment extends Fragment {
      */
     private void joinLeagueRequest(final String leagueName) {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child("league").addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_league)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -125,8 +124,8 @@ public class JoinLeagueFragment extends Fragment {
                         final RequestJoinLeagueModel requestJoinLeagueModel = new RequestJoinLeagueModel();
                         requestJoinLeagueModel.setLeagueName(leagueName);
                         requestJoinLeagueModel.setRequestFromId(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                        firebase.child("user").child(leagueOwnerId).child("leagueJoinRequest")
-                                .child(firebase.child("user").child(leagueOwnerId).child("leagueJoinRequest").push().getKey())
+                        firebase.child(getString(R.string.db_key_user)).child(leagueOwnerId).child(getString(R.string.db_key_leagueJoinRequest))
+                                .child(firebase.child(getString(R.string.db_key_user)).child(leagueOwnerId).child(getString(R.string.db_key_leagueJoinRequest)).push().getKey())
                                 .setValue(requestJoinLeagueModel, new Firebase.CompletionListener() {
                                     @Override
                                     public void onComplete(FirebaseError firebaseError, Firebase firebase) {

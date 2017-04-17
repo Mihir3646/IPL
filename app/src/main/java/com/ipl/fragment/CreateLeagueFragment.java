@@ -1,7 +1,6 @@
 package com.ipl.fragment;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -19,11 +18,8 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ipl.R;
-import com.ipl.activity.HomeActivity;
-import com.ipl.activity.SignInActivity;
 import com.ipl.firebase.FirebaseConstant;
 import com.ipl.model.LeagueDetailsModel;
-import com.ipl.model.UserDetailsModel;
 import com.ipl.utils.Utils;
 
 
@@ -68,7 +64,7 @@ public class CreateLeagueFragment extends Fragment implements View.OnClickListen
         final Firebase ref = new Firebase(FirebaseConstant.FIREBASE_URL);
         final LeagueDetailsModel leagueDetailsModel = new LeagueDetailsModel();
         leagueDetailsModel.setLeagueName(edtLeagueName.getText().toString().trim());
-        ref.child("league").addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child(getString(R.string.db_key_league)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
@@ -78,7 +74,7 @@ public class CreateLeagueFragment extends Fragment implements View.OnClickListen
 
                     } else {
                         //do something
-                        ref.child("league").child(edtLeagueName.getText().toString()).
+                        ref.child(getString(R.string.db_key_league)).child(edtLeagueName.getText().toString()).
                                 setValue(FirebaseAuth.getInstance().getCurrentUser().getUid(), new Firebase.CompletionListener() {
                                     @Override
                                     public void onComplete(FirebaseError firebaseError, Firebase firebase) {

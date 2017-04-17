@@ -27,14 +27,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.ipl.R;
 import com.ipl.firebase.FirebaseConstant;
 import com.ipl.model.UserDetailsModel;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 
 
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -165,17 +160,17 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-                        ref.child("user").addListenerForSingleValueEvent(new ValueEventListener() {
+                        ref.child(getString(R.string.db_key_user)).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                                     if (dataSnapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).exists()) {
                                         //do ur stuff
                                         final Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
-                                        intent.putExtra("userName", userName);
-                                        intent.putExtra("userEmail", userEmail);
-                                        intent.putExtra("userNickName", userNickName);
-                                        intent.putExtra("userImgUrl", userimgUrl);
+                                        intent.putExtra(getString(R.string.db_key_userName), userName);
+                                        intent.putExtra(getString(R.string.db_key_userEmail), userEmail);
+                                        intent.putExtra(getString(R.string.db_key_userNickName), userNickName);
+                                        intent.putExtra(getString(R.string.db_key_userImageURl), userimgUrl);
                                         startActivity(intent);
                                         finish();
                                     } else {
@@ -224,10 +219,10 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                     Log.e(TAG, firebaseError.getMessage());
                 } else {
                     final Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
-                    intent.putExtra("userName", userName);
-                    intent.putExtra("userEmail", userEmail);
-                    intent.putExtra("userNickName", userNickName);
-                    intent.putExtra("userImgUrl", userimgUrl);
+                    intent.putExtra(getString(R.string.db_key_userName), userName);
+                    intent.putExtra(getString(R.string.db_key_userEmail), userEmail);
+                    intent.putExtra(getString(R.string.db_key_userNickName), userNickName);
+                    intent.putExtra(getString(R.string.db_key_userImageURl), userimgUrl);
                     startActivity(intent);
                     finish();
                 }

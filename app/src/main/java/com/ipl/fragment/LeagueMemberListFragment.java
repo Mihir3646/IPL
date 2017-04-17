@@ -52,8 +52,8 @@ public class LeagueMemberListFragment extends Fragment {
     private void getMemberList() {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
         final String leagueName = ((HomeActivity) getActivity()).getLeagueName();
-        firebase.child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child("myLeague").child(leagueName).addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_user)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(getString(R.string.db_key_myLeague)).child(leagueName).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -67,8 +67,8 @@ public class LeagueMemberListFragment extends Fragment {
             }
         });
 
-        firebase.child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child("myLeague").addListenerForSingleValueEvent(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_user)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(getString(R.string.db_key_myLeague)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 leagueMemberListAdapter.notifyDataSetChanged();
@@ -86,21 +86,22 @@ public class LeagueMemberListFragment extends Fragment {
      */
     private void getMemberName(final String memberId) {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child("user").child(memberId).child("userNickName").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                final LeagueMemberListModel leagueMemberListModel = new LeagueMemberListModel();
-                memberName = dataSnapshot.getValue().toString();
-                leagueMemberListModel.setLeagueMemberName(memberName);
-                leagueMemberListModelArrayList.add(leagueMemberListModel);
-                leagueMemberListAdapter.notifyDataSetChanged();
-            }
+        firebase.child(getString(R.string.db_key_user)).child(memberId).child(getString(R.string.db_key_userNickName))
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        final LeagueMemberListModel leagueMemberListModel = new LeagueMemberListModel();
+                        memberName = dataSnapshot.getValue().toString();
+                        leagueMemberListModel.setLeagueMemberName(memberName);
+                        leagueMemberListModelArrayList.add(leagueMemberListModel);
+                        leagueMemberListAdapter.notifyDataSetChanged();
+                    }
 
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
 
-            }
-        });
+                    }
+                });
     }
 
 }

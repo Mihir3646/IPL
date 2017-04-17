@@ -9,4 +9,16 @@
     <string name="join_league">Join League</string>
     <string name="my_league">My League</string>
     <string name="logout">Log Out</string>
+    <string name="accepted">accepted</string>
+    <string name="db_key_accepted">accepted</string>
+    <string name="login_with_google">Login with google</string>
+    <string name="sample_user_name">Sample User Name</string>
+    <string name="enter_league_name">Enter league name</string>
+    <string name="invite_friend">Invite Friend</string>
+    <string name="league_name">League name</string>
+    <string name="leaderboard">LeaderBoard</string>
+    <string name="submit">Submit</string>
+    <string name="created">Created</string>
+    <string name="joined">joined</string>
+    <string name="join">Join</string>
 </resources>

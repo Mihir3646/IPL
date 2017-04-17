@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ipl.R;
-import com.ipl.fragment.CreatedLeagueFragment;
 import com.ipl.fragment.JoinedLeagueFragment;
 import com.ipl.fragment.LeagueMatchPredictionFragment;
 import com.ipl.model.JoinedLeagueModel;
@@ -59,9 +58,9 @@ public class JoinedLeagueAdapter extends BaseAdapter {
 
         tvLeagueName.setText(joinedLeagueModel.getLeagueName());
         tvStatus.setText(joinedLeagueModel.getStatus());
-        if (joinedLeagueModel.getStatus().equals("pending")) {
+        if (joinedLeagueModel.getStatus().equals(context.getString(R.string.db_key_pending))) {
             tvStatus.setBackgroundColor(ContextCompat.getColor(context, R.color.redColor));
-        } else if (joinedLeagueModel.getStatus().equals("accepted")) {
+        } else if (joinedLeagueModel.getStatus().equals(context.getString(R.string.db_key_accepted))) {
 //            tvStatus.setBackgroundColor(ContextCompat.getColor(context, R.color.colorLightGreen));
             tvStatus.setVisibility(View.INVISIBLE);
             llJoinedLeague.setOnClickListener(new View.OnClickListener() {

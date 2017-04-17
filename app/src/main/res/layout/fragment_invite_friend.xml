@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/navyBlueColor"
-        android:text="Invite Friend"
+        android:text="@string/invite_friend"
         android:textColor="@color/colorWhite"
         android:textStyle="bold" />
 
