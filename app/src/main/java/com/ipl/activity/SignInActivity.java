@@ -33,22 +33,25 @@ import com.ipl.model.UserDetailsModel;
 
 
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
-    private final int RC_SIGN_IN = 101;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     final String TAG = "SignInActivity";
-    private GoogleApiClient mGoogleApiClient;
     private String userName;
     private String userEmail;
     private String userNickName;
     private String userimgUrl;
+
+    private final int RC_SIGN_IN = 101;
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         initView();
-//        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        //        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
     }
 
     /**
@@ -82,11 +85,9 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // ...
             }
         };
     }
-
 
     @Override
     public void onClick(View view) {
@@ -95,7 +96,6 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 signIn();
                 break;
         }
-
     }
 
     /**
@@ -131,12 +131,12 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 userimgUrl = account.getPhotoUrl().toString();
                 firebaseAuthWithGoogle(account);
             } else {
+                result.getStatus();
                 // Google Sign In failed, update UI appropriately
                 // ...
             }
         }
     }
-
 
     @Override
     public void onStart() {
@@ -168,26 +168,23 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                         ref.child(getString(R.string.db_key_user)).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
+                                boolean isUserExist = false;
                                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                                     if (dataSnapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).exists()) {
-                                        //do ur stuff
-                                        final Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
-                                        intent.putExtra(getString(R.string.db_key_userName), userName);
-                                        intent.putExtra(getString(R.string.db_key_userEmail), userEmail);
-                                        intent.putExtra(getString(R.string.db_key_userNickName), userNickName);
-                                        intent.putExtra(getString(R.string.db_key_userImageURl), userimgUrl);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        //do something
-                                        storeUserDetails();
+                                        isUserExist = true;
+                                        break;
                                     }
+                                }
+
+                                if(isUserExist){
+                                    callHomeActivity();
+                                } else {
+                                    storeUserDetails();
                                 }
                             }
 
                             @Override
                             public void onCancelled(FirebaseError firebaseError) {
-
                             }
                         });
                         // If sign in fails, display a message to the user. If sign in succeeds
@@ -198,15 +195,23 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                             Toast.makeText(SignInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        // ...
                     }
                 });
+    }
+
+    private void callHomeActivity() {
+        final Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+        intent.putExtra(getString(R.string.db_key_userName), userName);
+        intent.putExtra(getString(R.string.db_key_userEmail), userEmail);
+        intent.putExtra(getString(R.string.db_key_userNickName), userNickName);
+        intent.putExtra(getString(R.string.db_key_userImageURl), userimgUrl);
+        startActivity(intent);
+        finish();
     }
 
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
     //store user details
@@ -223,17 +228,10 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 if (firebaseError != null) {
                     Log.e(TAG, firebaseError.getMessage());
                 } else {
-                    final Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
-                    intent.putExtra(getString(R.string.db_key_userName), userName);
-                    intent.putExtra(getString(R.string.db_key_userEmail), userEmail);
-                    intent.putExtra(getString(R.string.db_key_userNickName), userNickName);
-                    intent.putExtra(getString(R.string.db_key_userImageURl), userimgUrl);
-                    startActivity(intent);
-                    finish();
+                    callHomeActivity();
                 }
             }
         });
-
     }
 
 }
