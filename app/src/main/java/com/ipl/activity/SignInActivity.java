@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -160,43 +161,47 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         final Firebase ref = new Firebase(FirebaseConstant.FIREBASE_URL);
 
         final AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+                Query query = ref.child(getString(R.string.db_key_user)).orderByChild(getString(R.string.db_key_userEmail)).equalTo(userEmail);
+
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-                        ref.child(getString(R.string.db_key_user)).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                boolean isUserExist = false;
-                                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                    if (dataSnapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).exists()) {
-                                        isUserExist = true;
-                                        break;
-                                    }
-                                }
-
-                                if(isUserExist){
-                                    callHomeActivity();
-                                } else {
-                                    storeUserDetails();
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(FirebaseError firebaseError) {
-                            }
-                        });
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
-                            Toast.makeText(SignInActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            callHomeActivity();
+                        } else {
+                            storeUserDetails();
                         }
+
+                        //                                boolean isUserExist = false;
+                        //                                for (DataSnapshot ignored : dataSnapshot.getChildren()) {
+                        //                                    if (dataSnapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).exists()) {
+                        //                                        isUserExist = true;
+                        //                                        break;
+                        //                                    }
+                        //                                }
+                        //
+                        //                                if(isUserExist){
+                        //                                    callHomeActivity();
+                        //                                } else {
+                        //                                    storeUserDetails();
+                        //                                }
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
                     }
                 });
+                // If sign in fails, display a message to the user. If sign in succeeds the auth state listener will be notified and logic to handle the signed in user can be handled in the listener.
+                if (!task.isSuccessful()) {
+                    Log.w(TAG, "signInWithCredential", task.getException());
+                    Toast.makeText(SignInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void callHomeActivity() {

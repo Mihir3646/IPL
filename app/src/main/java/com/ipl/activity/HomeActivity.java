@@ -224,18 +224,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         for (int i = 0; i < matchResultModelArrayList.size(); i++) {
             for (int j = 0; j < predictedResultModelArrayList.size(); j++) {
                 if (matchResultModelArrayList.get(i).getMatchId().equals(predictedResultModelArrayList.get(j).getMatchId())) {
-                    if (matchResultModelArrayList.get(i).getWinningTeam().equals(predictedResultModelArrayList.get(j).getSelectedTeam())) {
-                        firebase.child(getString(R.string.db_key_leaderBoard)).child(predictedResultModelArrayList.get(j).getLeagueName())
-                                .child(predictedResultModelArrayList.get(j).getMatchId()).child(predictedResultModelArrayList.get(j).getUserId())
-                                .setValue(1, new Firebase.CompletionListener() {
-                                    @Override
-                                    public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                                        if (firebaseError != null) {
-                                        } else {
+                   if (matchResultModelArrayList.get(i).getWinningTeam().equals(predictedResultModelArrayList.get(j).getSelectedTeam())) {
+                    firebase.child(getString(R.string.db_key_leaderBoard)).child(predictedResultModelArrayList.get(j).getLeagueName())
+                            .child(predictedResultModelArrayList.get(j).getMatchId()).child(predictedResultModelArrayList.get(j).getUserId())
+                            .setValue(1, new Firebase.CompletionListener() {
+                                @Override
+                                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                    if (firebaseError != null) {
+                                    } else {
 
-                                        }
                                     }
-                                });
+                                }
+                            });
                     }
                 }
             }

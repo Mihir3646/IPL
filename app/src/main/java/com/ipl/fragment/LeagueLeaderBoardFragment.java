@@ -81,23 +81,12 @@ public class LeagueLeaderBoardFragment extends Fragment {
             }
         });
 
-        firebase.child(getString(R.string.db_key_leaderBoard)).child(leagueName).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
     }
 
     /**
      * This method is to get user details by id
      */
-    private void getUserDetails(final String userID) {
+    private String getUserDetails(final String userID) {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
         firebase.child(getString(R.string.db_key_user)).child(userID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -110,6 +99,7 @@ public class LeagueLeaderBoardFragment extends Fragment {
 
             }
         });
+        return "";
     }
 
     /**
