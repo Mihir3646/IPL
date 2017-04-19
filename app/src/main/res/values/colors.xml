@@ -7,6 +7,8 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="textColor">#646464</color>
     <color name="backGroundColor">#EEEEEE</color>
+    <color name="colorGray">#B1B1B1</color>
+    <color name="colorGrayLighter">#dadada</color>
 
     <color name="primary">#00BCD4</color>
     <color name="primary_dark">#0097A7</color>
@@ -15,11 +17,11 @@
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
-    <color name="divider">#B6B6B6</color>
     <color name="colorBlack">#000000</color>
     <color name="colorLightGreen">#48B78D</color>
 
     <color name="colorRed">#E53935</color>
+    <color name="colorPink">#e84c7c</color>
 
     <color name="floatingButtonColor">#009789</color>
     <color name="colorYellow">#FFCA28</color>

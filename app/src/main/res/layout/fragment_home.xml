@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/drawable_gradient_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/fragment_home_tv_match_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/_5sdp"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_16sdp"
+        android:textStyle="bold"
+        tools:text="Match 1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_minus10sdp"
+        android:background="@color/navyBlueColor"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/fragment_home_iv_team_one"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:background="@drawable/drawable_circle"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_gl"/>
+
+        <TextView
+            android:id="@+id/fragment_home_tv_vs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/vs"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_20sdp"/>
+
+        <ImageView
+            android:id="@+id/fragment_home_iv_team_two"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:background="@drawable/drawable_circle"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_kkr"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_home_llSelectedLeagues"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_60sdp"
+                android:layout_marginStart="@dimen/_60sdp"
+                android:background="@color/primary_dark"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"/>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_60sdp"
+                android:layout_marginStart="@dimen/_60sdp"
+                android:background="@color/primary_dark"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/fragment_home_rvSelectedLeaguesTeamOne"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_weight="1"
+                tools:listitem="@layout/row_league_icon"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/fragment_home_rvSelectedLeaguesTeamTwo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_weight="1"
+                tools:listitem="@layout/row_league_icon_end"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_home_llSubmitLeague"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fragment_home_rvListOfLeagues"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_weight="1"
+            tools:listitem="@layout/row_league_item"/>
+
+        <Button
+            android:id="@+id/fragment_home_btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="@string/submit"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"/>
+    </LinearLayout>
+</LinearLayout>
