@@ -1,6 +1,7 @@
 package com.ipl.fragment;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.ipl.activity.HomeActivity;
 import com.ipl.adapter.CreatedLeagueAdapter;
 import com.ipl.firebase.FirebaseConstant;
 import com.ipl.model.CreatedLeagueModel;
+import com.ipl.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class CreatedLeagueFragment extends Fragment {
     private CreatedLeagueAdapter createdLeagueAdapter;
     private ArrayList<CreatedLeagueModel> createdLeagueModelArrayList = new ArrayList<>();
     private int count = 0;
+    private ProgressDialog progressDialog;
 
     @Nullable
     @Override
@@ -50,8 +53,9 @@ public class CreatedLeagueFragment extends Fragment {
      * This method is to get the created league list from db
      */
     private void getCreatedLeagueList() {
+        progressDialog = Utils.showProgressDialog(getActivity(), getString(R.string.please_wait), false);
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child(getString(R.string.db_key_league)).addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_league)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -71,6 +75,7 @@ public class CreatedLeagueFragment extends Fragment {
                                         createdLeagueModelArrayList.add(createdLeagueModel);
                                         count = 0;
                                         createdLeagueAdapter.notifyDataSetChanged();
+                                        Utils.dismissProgressDialog(progressDialog);
 
                                     }
 

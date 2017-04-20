@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-
-import com.ipl.R;
+import android.app.ProgressDialog;
 
 public class Utils {
     /**
@@ -35,5 +34,35 @@ public class Utils {
         fragmentTransaction.replace(containerId, newFragment, newFragment.getClass().getSimpleName());
         fragmentTransaction.commitAllowingStateLoss();
     }
+
+    /**
+     * @param mActivity
+     * @param message
+     * @param isCancelable
+     * @return
+     * @purpose show progress dialog
+     */
+    public static ProgressDialog showProgressDialog(final Activity mActivity, final String message, boolean isCancelable) {
+
+        if (mActivity != null) {
+            final ProgressDialog mDialog = new ProgressDialog(mActivity);
+            mDialog.setCancelable(isCancelable);
+            mDialog.setCanceledOnTouchOutside(false);
+            mDialog.setMessage(message);
+            mDialog.show();
+            return mDialog;
+        }
+        return null;
+    }
+
+    /**
+     * @purpose dismiss progress dialog
+     */
+    public static void dismissProgressDialog(ProgressDialog mDialog) {
+        if ((mDialog != null) && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
+    }
+
 
 }

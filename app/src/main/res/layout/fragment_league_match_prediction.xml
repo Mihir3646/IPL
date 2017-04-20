@@ -21,8 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
-            android:text="Match"
-            android:textColor="@color/colorWhite"
+            android:text="@string/match"
+            android:textColor="@color/blueColor"
             android:textStyle="bold" />
 
         <View

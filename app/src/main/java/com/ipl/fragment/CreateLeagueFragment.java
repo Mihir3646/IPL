@@ -49,7 +49,7 @@ public class CreateLeagueFragment extends Fragment implements View.OnClickListen
         switch (view.getId()) {
             case R.id.fragment_create_league_btn_create_league:
                 if (TextUtils.isEmpty(edtLeagueName.getText().toString().trim())) {
-                    Toast.makeText(getActivity(), "Please enter your league name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.enter_league_name_alert), Toast.LENGTH_SHORT).show();
                 } else {
                     storeLeagueData();
                 }
@@ -70,7 +70,8 @@ public class CreateLeagueFragment extends Fragment implements View.OnClickListen
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     if (dataSnapshot.child(edtLeagueName.getText().toString().trim()).exists()) {
                         //do ur stuff
-                        Toast.makeText(getActivity(), "League name already in use", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getString(R.string.league_name_exist_alert), Toast.LENGTH_SHORT).show();
+                        break;
 
                     } else {
                         //do something
@@ -81,10 +82,13 @@ public class CreateLeagueFragment extends Fragment implements View.OnClickListen
                                         if (firebaseError != null) {
                                             Log.e(TAG, firebaseError.getMessage());
                                         } else {
-                                            Utils.replaceFragment(getActivity(), new InviteFriendFragment(), R.id.activity_home_container);
+                                            if (getActivity() != null) {
+                                                Utils.replaceFragment(getActivity(), new InviteFriendFragment(), R.id.activity_home_container);
+                                            }
                                         }
                                     }
                                 });
+                        break;
                     }
                 }
             }

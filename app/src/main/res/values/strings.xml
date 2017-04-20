@@ -22,4 +22,8 @@
     <string name="joined">joined</string>
     <string name="join">Join</string>
     <string name="no_data_found">No Data Found</string>
+    <string name="match">Match</string>
+    <string name="please_wait">Please wait</string>
+    <string name="league_name_exist_alert">League name already in use</string>
+    <string name="enter_league_name_alert">Please enter your league name</string>
 </resources>

@@ -55,7 +55,7 @@ public class PendingRequestListFragment extends Fragment {
         final String leagueName = ((HomeActivity) getActivity()).getLeagueName();
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
         firebase.child(getString(R.string.db_key_user)).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(getString(R.string.db_key_leagueJoinRequest))
-                .addValueEventListener(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -105,7 +105,7 @@ public class PendingRequestListFragment extends Fragment {
      */
     public void removeRequest(final String requestFromName) {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child(getString(R.string.db_key_user)).addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_user)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -145,7 +145,7 @@ public class PendingRequestListFragment extends Fragment {
      */
     public void acceptRequest(final String requestFromName) {
         final Firebase firebase = new Firebase(FirebaseConstant.FIREBASE_URL);
-        firebase.child(getString(R.string.db_key_user)).addValueEventListener(new ValueEventListener() {
+        firebase.child(getString(R.string.db_key_user)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {

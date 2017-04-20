@@ -16,6 +16,7 @@ import com.ipl.fragment.JoinLeagueFragment;
 import com.ipl.model.JoinLeagueModel;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class JoinLeagueAdapter extends BaseAdapter implements View.OnClickListener {
     private Context context; //context
@@ -23,11 +24,13 @@ public class JoinLeagueAdapter extends BaseAdapter implements View.OnClickListen
     private Fragment fragment;
     private TextView tvLeagueName;
     private Button btnJoinLeague;
+    private ArrayList<JoinLeagueModel> arrayList;
 
     public JoinLeagueAdapter(Context context, ArrayList<JoinLeagueModel> resultList, final Fragment fragment) {
         this.context = context;
         this.resultList = resultList;
         this.fragment = fragment;
+        this.arrayList = new ArrayList<>();
     }
 
     @Override
@@ -53,15 +56,22 @@ public class JoinLeagueAdapter extends BaseAdapter implements View.OnClickListen
         final JoinLeagueModel joinLeagueModel = (JoinLeagueModel) getItem(i);
         tvLeagueName = (TextView) convertView.findViewById(R.id.row_item_join_league_tv_league_name);
         btnJoinLeague = (Button) convertView.findViewById(R.id.row_item_join_league_btn_join_league);
-        btnJoinLeague.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Button btnJoin = (Button) view.findViewById(R.id.row_item_join_league_btn_join_league);
-                ((JoinLeagueFragment) fragment).requestJoinLeague(joinLeagueModel.getLeagueName());
-                btnJoin.setText(context.getString(R.string.db_key_pending));
-                btnJoin.setBackgroundColor(ContextCompat.getColor(context, R.color.redColor));
-            }
-        });
+
+        if (arrayList.size() == 0) {
+            this.arrayList.addAll(resultList);
+        }
+
+        if (!btnJoinLeague.getText().equals(context.getString(R.string.db_key_pending))) {
+            btnJoinLeague.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final Button btnJoin = (Button) view.findViewById(R.id.row_item_join_league_btn_join_league);
+                    ((JoinLeagueFragment) fragment).requestJoinLeague(joinLeagueModel.getLeagueName());
+                    btnJoin.setText(context.getString(R.string.db_key_pending));
+                    btnJoin.setBackgroundColor(ContextCompat.getColor(context, R.color.redColor));
+                }
+            });
+        }
         tvLeagueName.setText(joinLeagueModel.getLeagueName());
         return convertView;
     }
@@ -73,5 +83,21 @@ public class JoinLeagueAdapter extends BaseAdapter implements View.OnClickListen
 
                 break;
         }
+    }
+
+    // Filter Class
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        resultList.clear();
+        if (charText.length() == 0) {
+            resultList.addAll(arrayList);
+        } else {
+            for (JoinLeagueModel wp : arrayList) {
+                if (wp.getLeagueName().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    resultList.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

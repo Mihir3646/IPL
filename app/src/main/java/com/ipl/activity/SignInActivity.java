@@ -1,5 +1,6 @@
 package com.ipl.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,6 +32,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.ipl.R;
 import com.ipl.firebase.FirebaseConstant;
 import com.ipl.model.UserDetailsModel;
+import com.ipl.utils.Utils;
 
 
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -46,6 +48,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     private GoogleApiClient mGoogleApiClient;
+    private ProgressDialog progressDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,6 +126,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 Log.e(TAG, e.getMessage());
             }
             if (result.isSuccess()) {
+                progressDialog = Utils.showProgressDialog(this, getString(R.string.please_wait), false);
                 // Google Sign In was successful, authenticate with Firebase
                 final GoogleSignInAccount account = result.getSignInAccount();
                 assert account != null;
@@ -165,7 +169,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-                Query query = ref.child(getString(R.string.db_key_user)).orderByChild(getString(R.string.db_key_userEmail)).equalTo(userEmail);
+                final Query query = ref.child(getString(R.string.db_key_user)).orderByChild(getString(R.string.db_key_userEmail)).equalTo(userEmail);
 
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -200,6 +204,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                     Log.w(TAG, "signInWithCredential", task.getException());
                     Toast.makeText(SignInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                 }
+                Utils.dismissProgressDialog(progressDialog);
             }
         });
     }
